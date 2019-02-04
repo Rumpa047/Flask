@@ -1,6 +1,6 @@
-from flask import Flask, redirect, request, url_for
+from flask import Flask, redirect, request, url_for, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='template')
 
 
 @app.route('/')
@@ -55,6 +55,10 @@ def about():
         return redirect(url_for('show_about', name = discription))
 
 
-if __name__ == "__main__":
+@app.route('/result/<int:score>')
+def result(score):
+    return render_template('show_result.html', mark=score)
 
+
+if __name__ == "__main__":
     app.run(debug=True)
